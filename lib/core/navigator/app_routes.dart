@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_base/features/weather/presentation/screens/weather_screen.dart';
 
 class AppRoutes {
+  AppRoutes._();
+
   static String get initial => WeatherScreen.router;
 
   static Widget _buildScreen(RouteSettings settings, BuildContext context) {

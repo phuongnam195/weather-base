@@ -1,70 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_base/core/theme/app_colors.dart';
+import 'package:weather_base/global.dart';
 
 ThemeData appTheme(BuildContext context) {
   final themeData = ThemeData(
-    fontFamily: 'NotoSansJP',
-    colorScheme: const ColorScheme.light(
-      primary: EVMColors.primary,
-    ),
     appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent)),
     textTheme: Theme.of(context).textTheme.copyWith(
-          /// Title
+          displayLarge: TextStyle(
+            fontSize: 64.sp,
+            color: AppColors.textWhite,
+          ),
           titleLarge: TextStyle(
             fontSize: 32.sp,
-            fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
           titleMedium: TextStyle(
             fontSize: 24.sp,
-            fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
           titleSmall: TextStyle(
             fontSize: 20.sp,
-            fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
           bodyLarge: TextStyle(
             fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
           bodyMedium: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
           bodySmall: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
-
-          /// Lable
           labelMedium: TextStyle(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
-
           labelSmall: TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.w600,
-            color: EVMColors.blackLight,
+            color: AppColors.textWhite,
           ),
         ),
   );
 
-  if (ScreenUtil().orientation == Orientation.portrait) {
-    _portraitThemeData ??= themeData;
-    return _landscapeThemeData ?? _portraitThemeData!;
-  } else {
-    _landscapeThemeData ??= themeData;
-    _textTheme ??= _landscapeThemeData?.textTheme;
-    return _landscapeThemeData!;
-  }
+  return themeData;
 }
 
-TextTheme get textTheme => _textTheme ?? Theme.of(Global.context).textTheme;
+TextTheme get textTheme => Theme.of(Global.context).textTheme;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_base/core/navigator/app_routes.dart';
+import 'package:weather_base/core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +23,8 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Weather Base',
         onGenerateRoute: AppRoutes.onGenerateRoute,
-        theme: theme(context),
-        initialRoute: AppRouter.initialRouter,
-        navigatorObservers: [AppNavObserver()],
+        theme: appTheme(context),
+        initialRoute: AppRoutes.initial,
       ),
     );
   }
