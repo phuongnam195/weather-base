@@ -3,7 +3,10 @@ import 'dart:ui';
 class AppColors {
   AppColors._();
 
-  static const textWhite = Color(0xFFFFFFFF);
+  static const white = Color(0xFFFFFFFF);
+  static const black = Color(0xFF000000);
+
+  static const textWhite = white;
 
   static const sunny = Color(0xFF33AADD);
   static const sunnyDark = Color(0xFF29B2DD);

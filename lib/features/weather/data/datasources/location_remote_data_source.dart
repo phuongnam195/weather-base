@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:weather_base/features/weather/data/models/locations_response_model.dart';
+
+import '../models/response/locations_response_model.dart';
 
 part 'location_remote_data_source.g.dart';
 

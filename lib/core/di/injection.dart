@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weather_base/core/di/injection.config.dart';
-import 'package:weather_base/core/network/curl_logger_dio_interceptor.dart';
+import 'package:weather_base/core/network/pretty_dio_logger.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -20,7 +20,7 @@ abstract class AppModuleDepedenciesProvider {
       },
     );
     final dio = Dio(baseOptions);
-    dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
+    dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
     return dio;
   }
 }
