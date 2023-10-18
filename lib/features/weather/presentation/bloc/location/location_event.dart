@@ -2,6 +2,11 @@ part of 'location_bloc.dart';
 
 abstract class LocationEvent extends BaseEvent {}
 
+class OnGetCurrentLocation extends LocationEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class OnEditSearch extends LocationEvent {
   final String keyword;
 

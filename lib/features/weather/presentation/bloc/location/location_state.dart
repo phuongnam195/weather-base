@@ -17,3 +17,12 @@ class LocationSelected extends BaseState {
   @override
   List<Object?> get props => [location];
 }
+
+class CurrentLocationLoaded extends BaseState {
+  final LocationDto location;
+
+  CurrentLocationLoaded(this.location);
+
+  @override
+  List<Object?> get props => [location];
+}

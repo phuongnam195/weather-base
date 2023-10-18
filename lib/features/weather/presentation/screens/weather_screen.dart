@@ -9,6 +9,7 @@ import 'package:weather_base/features/weather/presentation/widgets/appbar.dart';
 import 'package:weather_base/features/weather/presentation/widgets/current_weather_panel.dart';
 import 'package:weather_base/features/weather/presentation/widgets/today_weather_card.dart';
 
+import '../bloc/location/location_bloc.dart';
 import '../bloc/weather/weather_bloc.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -22,10 +23,25 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   @override
+  void initState() {
+    getIt<LocationBloc>().add(OnGetCurrentLocation());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocListener<WeatherBloc, BaseState>(
-      bloc: getIt<WeatherBloc>(),
-      listener: (prev, curr) => [],
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<LocationBloc, BaseState>(
+          bloc: getIt<LocationBloc>(),
+          listenWhen: (prev, curr) => [CurrentLocationLoaded].contains(curr.runtimeType),
+          listener: (ctx, state) {
+            if (state is CurrentLocationLoaded) {
+              getIt<WeatherBloc>().add(OnFetchWeatherData(state.location));
+            }
+          },
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
