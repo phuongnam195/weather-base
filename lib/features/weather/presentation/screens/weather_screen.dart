@@ -6,8 +6,10 @@ import 'package:weather_base/core/di/injection.dart';
 import 'package:weather_base/core/theme/app_colors.dart';
 import 'package:weather_base/core/utils/dialog_utils.dart';
 import 'package:weather_base/core/utils/sized_box.dart';
+import 'package:weather_base/features/weather/domain/dto/location_dto.dart';
 import 'package:weather_base/features/weather/presentation/widgets/appbar.dart';
 import 'package:weather_base/features/weather/presentation/widgets/current_weather_panel.dart';
+import 'package:weather_base/features/weather/presentation/widgets/forecast_weather_card.dart';
 import 'package:weather_base/features/weather/presentation/widgets/today_weather_card.dart';
 
 import '../bloc/location/location_bloc.dart';
@@ -78,9 +80,20 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 sh(50.h),
                 const WeatherAppBar(),
                 sh(8.h),
-                const CurrentWeatherPanel(),
-                sh(20.h),
-                const TodayWeatherCard(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const CurrentWeatherPanel(),
+                        sh(20.h),
+                        const TodayWeatherCard(),
+                        sh(20.h),
+                        const ForecastWeatherCard(),
+                        sh(10.h),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

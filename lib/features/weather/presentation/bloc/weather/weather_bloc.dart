@@ -6,6 +6,7 @@ import 'package:weather_base/core/base/failures.dart';
 import 'package:weather_base/core/constants/assets.dart';
 import 'package:weather_base/core/constants/enums.dart';
 import 'package:weather_base/core/theme/app_colors.dart';
+import 'package:weather_base/features/weather/domain/dto/daily_weather_dto.dart';
 import 'package:weather_base/features/weather/domain/dto/hourly_weather_dto.dart';
 import 'package:weather_base/features/weather/domain/dto/location_dto.dart';
 import 'package:weather_base/features/weather/domain/dto/weather_data_dto.dart';
@@ -50,6 +51,8 @@ class WeatherBloc extends Bloc<WeatherEvent, BaseState> {
           nextHourlyWeather.add(hourlyWeather);
         }
         emit(TodayWeatherState(currentCondition: condition, nextHourlyWeather: nextHourlyWeather));
+
+        emit(NextDaysWeatherState(currentCondition: condition, nextDaysWeather: data.dailyData.sublist(1)));
       },
     );
   }

@@ -37,7 +37,7 @@ class GetWeatherDataUseCase extends EitherUseCase<WeatherDataDto, LocationDto> {
         'temperature_2m_max',
         'temperature_2m_min',
       ].join(','),
-      forecastDays: 3,
+      forecastDays: 4,
     );
 
     return handleRepoResult(

@@ -58,3 +58,16 @@ class TodayWeatherState extends BaseState {
   @override
   List<Object?> get props => [currentCondition, nextHourlyWeather];
 }
+
+class NextDaysWeatherState extends BaseState {
+  final WeatherCondition currentCondition;
+  final List<DailyWeatherDto> nextDaysWeather;
+
+  NextDaysWeatherState({
+    required this.currentCondition,
+    required this.nextDaysWeather,
+  });
+
+  @override
+  List<Object?> get props => [currentCondition, nextDaysWeather];
+}
