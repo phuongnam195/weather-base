@@ -42,6 +42,8 @@ class SearchLocationScreen extends StatelessWidget {
               border: InputBorder.none,
               suffixIcon: const Icon(Icons.search_rounded, color: AppColors.white),
             ),
+            cursorColor: AppColors.white,
+            cursorHeight: 20.h,
           ),
         ),
         body: Column(
@@ -94,7 +96,10 @@ class SearchLocationScreen extends StatelessWidget {
             onTap: () {
               _bloc.add(OnSelectLocation(item));
             },
-            title: Text('${item.name}, ${item.country}', style: textTheme.bodyLarge!.copyWith(color: AppColors.black),),
+            title: Text(
+              '${item.name}, ${item.country}',
+              style: textTheme.bodyLarge!.copyWith(color: AppColors.black),
+            ),
           );
         },
         separatorBuilder: (ctx, index) => const Divider(),
