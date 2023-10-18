@@ -40,6 +40,10 @@ class LocationBloc extends Bloc<LocationEvent, BaseState> {
   }
 
   Future<void> _onSearchLocations(OnSearchLocations event, Emitter<BaseState> emit) async {
+    if (event.keyword.isEmpty) {
+      emit(LocationSearched(null));
+      return;
+    }
     emit(LoadingState());
     final either = await _searchLocationsUseCase.call(event.keyword);
     either.fold(

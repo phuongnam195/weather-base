@@ -43,7 +43,7 @@ class GetCurrentLocationUseCase extends EitherUseCase<LocationDto, NoParams> {
     final firstPlacemark = placemarks.first;
     final locationDto = LocationDto(
       id: firstPlacemark.hashCode,
-      name: firstPlacemark.name ?? 'Không xác định',
+      name: firstPlacemark.subAdministrativeArea ?? 'Không xác định',
       country: firstPlacemark.country ?? '',
       latitude: locationData.latitude!,
       longitude: locationData.longitude!,

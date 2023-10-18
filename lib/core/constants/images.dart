@@ -5,4 +5,6 @@ class _Image {
 
   final sunny = '$_path/sunny.png';
   final rainy = '$_path/rainy.png';
+  final dayCloud = '$_path/day_cloud.png';
+  final nightCloud = '$_path/night_cloud.png';
 }

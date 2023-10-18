@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:weather_base/core/di/injection.dart';
 import 'package:weather_base/core/navigator/app_routes.dart';
 import 'package:weather_base/core/theme/app_theme.dart';
@@ -9,6 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   configureDependencies();
+  initializeDateFormatting('vi_VN', null);
 
   runApp(const MainApp());
 }

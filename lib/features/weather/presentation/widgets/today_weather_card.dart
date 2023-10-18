@@ -31,7 +31,6 @@ class TodayWeatherCard extends StatelessWidget {
           nextHourlyWeather = state.nextHourlyWeather;
         }
         return Container(
-          height: 217.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
             color: currentCondition == WeatherCondition.sunny ? AppColors.sunnyShadow : AppColors.rainyShadow,
@@ -45,26 +44,24 @@ class TodayWeatherCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Hôm nay', style: textTheme.titleSmall!.bold()),
-                    Text(DateFormat('d MMM').format(DateTime.now()), style: textTheme.bodyLarge),
+                    Text(DateFormat('d MMM', 'vi_VN').format(DateTime.now()), style: textTheme.bodyLarge),
                   ],
                 ),
               ),
               sh(12.h),
               if (nextHourlyWeather.isNotEmpty)
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 14.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        for (int i = 0; i < 4; i++)
-                          _column(
-                            nextHourlyWeather[i].temperature.round(),
-                            nextHourlyWeather[i].isDay,
-                            nextHourlyWeather[i].time.hour,
-                          ),
-                      ],
-                    ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 14.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      for (int i = 0; i < 4; i++)
+                        _column(
+                          nextHourlyWeather[i].temperature.round(),
+                          nextHourlyWeather[i].isDay,
+                          nextHourlyWeather[i].time.hour,
+                        ),
+                    ],
                   ),
                 ),
             ],
@@ -77,27 +74,15 @@ class TodayWeatherCard extends StatelessWidget {
   Widget _column(int temp, bool isDay, int hour) {
     return Column(
       children: [
+        sh(13.h),
         Text('$temp°C', style: textTheme.bodyLarge),
-        sh(30.h),
-        if (isDay)
-          Padding(
-            padding: EdgeInsets.only(left: 9.w, right: 18.w),
-            child: SvgPicture.asset(
-              Assets.ic.day,
-              width: 43.w,
-              fit: BoxFit.fitWidth,
-            ),
-          )
-        else
-          Padding(
-            padding: EdgeInsets.only(left: 15.w, right: 12.w),
-            child: SvgPicture.asset(
-              Assets.ic.night,
-              width: 43.w,
-              fit: BoxFit.fitWidth,
-            ),
+        sh(20.h),
+          Image.asset(
+           isDay ? Assets.img.dayCloud : Assets.img.nightCloud,
+            width: 40.w,
+            fit: BoxFit.fitWidth,
           ),
-        const Spacer(),
+        sh(25.h),
         Text('${'$hour'.padLeft(2, '0')}.00', style: textTheme.bodyLarge),
         sh(20.h),
       ],

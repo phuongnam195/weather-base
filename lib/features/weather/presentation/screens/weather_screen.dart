@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_base/core/base/base_bloc.dart';
 import 'package:weather_base/core/di/injection.dart';
 import 'package:weather_base/core/theme/app_colors.dart';
+import 'package:weather_base/core/utils/dialog_utils.dart';
 import 'package:weather_base/core/utils/sized_box.dart';
 import 'package:weather_base/features/weather/presentation/widgets/appbar.dart';
 import 'package:weather_base/features/weather/presentation/widgets/current_weather_panel.dart';
@@ -34,10 +35,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
       listeners: [
         BlocListener<LocationBloc, BaseState>(
           bloc: getIt<LocationBloc>(),
-          listenWhen: (prev, curr) => [CurrentLocationLoaded].contains(curr.runtimeType),
+          listenWhen: (prev, curr) => [CurrentLocationLoaded, ErrorState].contains(curr.runtimeType),
           listener: (ctx, state) {
             if (state is CurrentLocationLoaded) {
               getIt<WeatherBloc>().add(OnFetchWeatherData(state.location));
+            } else if (state is ErrorState) {
+              DialogUtils.showError(content: state.failure.message);
+            }
+          },
+        ),
+        BlocListener<WeatherBloc, BaseState>(
+          bloc: getIt<WeatherBloc>(),
+          listenWhen: (prev, curr) => [ErrorState].contains(curr.runtimeType),
+          listener: (ctx, state) {
+            if (state is ErrorState) {
+              DialogUtils.showError(content: state.failure.message);
             }
           },
         ),
@@ -74,7 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
           ),
         ),
         SizedBox(
-          height: 5.h,
+          height: 8.h,
           child: BlocBuilder<WeatherBloc, BaseState>(
             bloc: getIt<WeatherBloc>(),
             buildWhen: (prev, curr) => [LoadingState, CurrentWeatherState].contains(curr.runtimeType),

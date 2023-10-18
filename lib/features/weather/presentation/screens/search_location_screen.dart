@@ -54,10 +54,17 @@ class SearchLocationScreen extends StatelessWidget {
                 buildWhen: (prev, curr) => [LocationSearched].contains(curr.runtimeType),
                 builder: (ctx, state) {
                   if (state is LocationSearched) {
-                    if (state.locations.isEmpty) {
-                      return const Center(child: Text('Không tìm thấy địa điểm nào'));
-                    } else {
-                      return _buildList(state.locations);
+                    if (state.locations != null) {
+                      if (state.locations!.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'Không tìm thấy địa điểm nào',
+                            style: textTheme.bodyLarge!.copyWith(color: AppColors.black),
+                          ),
+                        );
+                      } else {
+                        return _buildList(state.locations!);
+                      }
                     }
                   }
                   return Container();
@@ -81,6 +88,14 @@ class SearchLocationScreen extends StatelessWidget {
             ),
             sh(20.h),
           ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            getIt<LocationBloc>().add(OnGetCurrentLocation());
+            Navigator.of(context).pop();
+          },
+          label: Text('Vị trí hiện tại', style: textTheme.bodyLarge!.semiBold()),
+          icon: const Icon(Icons.my_location_rounded),
         ),
       ),
     );

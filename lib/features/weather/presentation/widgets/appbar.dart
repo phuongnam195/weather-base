@@ -27,7 +27,6 @@ class WeatherAppBar extends StatelessWidget {
             if (result is LocationDto) {
               getIt<WeatherBloc>().add(OnFetchWeatherData(result));
             }
-            getIt.resetLazySingleton<LocationBloc>();
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),

@@ -1,7 +1,7 @@
 part of 'location_bloc.dart';
 
 class LocationSearched extends BaseState {
-  final List<LocationDto> locations;
+  final List<LocationDto>? locations;
 
   LocationSearched(this.locations);
 

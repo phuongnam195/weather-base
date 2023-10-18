@@ -52,7 +52,7 @@ class CurrentWeatherPanel extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(temperature == null ? '' : '$temperature°', style: textTheme.displayLarge!.semiBold()),
+                Text(temperature == null ? '' : '${temperature.round()}°', style: textTheme.displayLarge!.semiBold()),
                 sh(35.h),
                 _SubInfoCard(
                   rain: rain,
